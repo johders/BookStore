@@ -11,7 +11,7 @@ namespace BookStore.Web.Data
 		public DbSet<Genre> Genres { get; set; }
 		public DbSet<GenreBooks> GenreBooks { get; set; }
 
-		protected BookContext(DbContextOptions<BookContext> options) : base(options) 
+		public BookContext(DbContextOptions<BookContext> options) : base(options) 
 		{
 		}
 

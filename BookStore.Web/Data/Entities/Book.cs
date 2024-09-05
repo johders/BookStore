@@ -21,7 +21,7 @@ namespace BookStore.Web.Data.Entities
         [Required, Range(1, int.MaxValue)]
         public int NumberOfPages { get; set; }
 
-        [Required, MaxLength(100), Unicode(false)]
+        [Required, MaxLength(150), Unicode(false)]
         public string Image { get; set; }
 
         [MaxLength(250)]
