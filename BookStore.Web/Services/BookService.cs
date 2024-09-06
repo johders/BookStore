@@ -1,23 +1,24 @@
 ﻿using BookStore.Core.Dtos;
+using BookStore.Core.Interfaces;
 using BookStore.Web.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Web.Services
 {
-	public class BookService
+	public class BookService : IBookService
 	{
 		private readonly IDbContextFactory<BookContext> _dbContextFactory;
 
 		public BookService(IDbContextFactory<BookContext> dbContextFactory)
-        {
+		{
 			_dbContextFactory = dbContextFactory;
 		}
-        public async Task<GenreDto[]> GetGenresAsync(bool topOnly)
+		public async Task<GenreDto[]> GetGenresAsync(bool topOnly)
 		{
 			using var context = _dbContextFactory.CreateDbContext();
 			var query = context.Genres.AsQueryable();
 
-			if(topOnly)
+			if (topOnly)
 			{
 				query = query.Where(g => g.IsTop);
 			}
@@ -72,7 +73,7 @@ namespace BookStore.Web.Services
 				.Take(count)
 				.ToArrayAsync();
 
-			if(books.Length < count)
+			if (books.Length < count)
 			{
 				var alreadyFetchedBookIds = books.Select(b => b.Id);
 
@@ -95,7 +96,7 @@ namespace BookStore.Web.Services
 
 			var book = await context.Books
 				.Where(b => b.Id == bookId)
-				.Select(b => new BookDetailsDto(b.Id, b.Title, b.Image, new AuthorDto(b.Author.Name, b.Author.Slug), 
+				.Select(b => new BookDetailsDto(b.Id, b.Title, b.Image, new AuthorDto(b.Author.Name, b.Author.Slug),
 				b.NumberOfPages, b.Format, b.Description, b.BookGenres.Select(bg => new GenreDto(bg.Genre.Name, bg.Genre.Slug)).ToArray(), b.BuyLink))
 				.FirstOrDefaultAsync();
 
@@ -134,7 +135,7 @@ namespace BookStore.Web.Services
 				.Take(pageSize)
 				.ToArrayAsync();
 
-			return new PagedResult<BookListDto> (books, totalCount);
+			return new PagedResult<BookListDto>(books, totalCount);
 
 		}
 

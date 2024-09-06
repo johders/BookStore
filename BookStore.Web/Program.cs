@@ -1,5 +1,7 @@
+using BookStore.Core.Interfaces;
 using BookStore.Web.Components;
 using BookStore.Web.Data;
+using BookStore.Web.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,8 @@ builder.Services.AddDbContextFactory<BookContext>(options =>
 });
 
 builder.Services.AddRazorComponents();
+
+builder.Services.AddTransient<IBookService, BookService>();
 
 var app = builder.Build();
 
