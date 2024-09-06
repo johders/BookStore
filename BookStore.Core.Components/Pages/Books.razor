@@ -54,6 +54,26 @@
 
 		<div class="col-md-3">
 
+			<div class="right-box">
+
+				<h3 class="heading m-0 mt-2 text-center py-3 bg-white heading">Popular Books</h3>
+				<div class="popular-books-list">
+					@foreach (var book in _popularBooks)
+					{
+						<div class="popular-book-item">
+							<a href="/book/@book.Id" title="@book.Title">							
+								<img src="@book.Image" alt="book.Title" class="me-3"/>
+							</a>
+							<div class="d-flex flex-column justify-content-center">
+								<a href="/book/@book.Id" class="book-title" title="@book.Title">@book.Title</a>
+								<a href="/authors/@book.Author.Slug/books" title="Books by @book.Author.Name" class="book-author">by @book.Author.Name</a>
+							</div>
+						</div>
+					}
+				</div>
+				
+			</div>
+
 		</div>
 	</div>
 </div>
