@@ -34,6 +34,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapRazorComponents<App>();
+app.MapRazorComponents<App>()
+	.AddAdditionalAssemblies(typeof(BookStore.Core.Components.Pages.Books).Assembly);
 
 app.Run();
