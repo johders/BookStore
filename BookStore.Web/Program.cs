@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 
-builder.Services.AddDbContext<BookContext>(options =>
+builder.Services.AddDbContextFactory<BookContext>(options =>
 {
 	var connectionString = builder.Configuration.GetConnectionString("BookStore");
 	options.UseSqlServer(connectionString);
