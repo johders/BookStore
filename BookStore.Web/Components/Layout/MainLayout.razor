@@ -1,17 +1,21 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<NavMenu/>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+<div class="container-fluid bg-main">
+	<div class="container d-flex flex-column justify-content-center align-items-center p-5">
+		<SectionOutlet SectionName="PageTitle"/>
+	</div>
+</div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+@Body
+
+<hr />
+
+<div class="container">
+	<footer class="d-flex align-items-center justify-content-center">
+		<p>
+			&copy; @DateTime.Today.Year - Buddy's Books | Developed by <a href="https://www.google.com" target="_blank">Jeffrey Besitos</a>
+		</p>
+	</footer>
 </div>
