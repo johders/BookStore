@@ -1,0 +1,23 @@
+﻿<div class="row">
+	@foreach (var book in Books)
+	{
+		<div class="book-block col-sm-6 col-lg-3">
+			<a href="/books/@book.Id" title="@book.Title">
+
+				<figure class="bg-main-light image-box">
+					<img class="book-img" src="@book.Image" alt="@book.Title" />
+				</figure>
+
+				<div class="p-2">
+					<h6 class="text-main heading text-center">@book.Title</h6>
+				</div>
+			</a>
+		</div>
+	}
+</div>
+
+@code{
+	[Parameter, EditorRequired]
+	public BookListDto[] Books { get; set; } = [];
+
+}
