@@ -50,7 +50,7 @@
     color: white;
 }
 
-.book-block{
+/*.book-block{
     margin-bottom: 20px;
 }
 
@@ -64,10 +64,12 @@
         width: 100%;
         height: 300px;
         object-fit: cover;
-    }
+    }*/
 
-.right-box{
-
+/*.right-box{
+    margin-top: 20px;
+    box-shadow: 0 0 5px lightgray;
+    border-radius: 8px;
 }
 
 .popular-book-item{
@@ -105,4 +107,4 @@
 .book-author{
     color: darkgray;
     font-size: 17px;
-}
+}*/

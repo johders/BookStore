@@ -129,10 +129,10 @@ namespace BookStore.Web.Services
 			var totalCount = await query.CountAsync();
 
 			var books = await query
-				.Select(b => new BookListDto(b.Id, b.Title, b.Image, new AuthorDto(b.Author.Name, b.Author.Slug)))
 				.OrderByDescending(b => b.Id)
 				.Skip((pageNo - 1) * pageSize)
 				.Take(pageSize)
+				.Select(b => new BookListDto(b.Id, b.Title, b.Image, new AuthorDto(b.Author.Name, b.Author.Slug)))
 				.ToArrayAsync();
 
 			return new PagedResult<BookListDto>(books, totalCount);
