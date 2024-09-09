@@ -1,4 +1,5 @@
 using BookStore.Core.Interfaces;
+using BookStore.Web;
 using BookStore.Web.Components;
 using BookStore.Web.Data;
 using BookStore.Web.Services;
@@ -36,5 +37,7 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
 	.AddAdditionalAssemblies(typeof(BookStore.Core.Components.Pages.Books).Assembly);
+
+app.MapBookEndpoints();
 
 app.Run();

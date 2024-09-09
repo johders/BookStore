@@ -29,8 +29,5 @@ namespace BookStore.Web
 
             return app;
         }
-        //Task<GenreDto[]> GetGenresAsync(bool topOnly);
-        //Task<BookListDto[]> GetPopularBooksAsync(int count, string? genreSlug = null);
-        //Task<BookListDto[]> GetSimilarBooksAsync(int bookId, int count);
     } 
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BookStore.Core.Interfaces;
+using BookStore.Mobile.Services;
+using Microsoft.Extensions.Logging;
 
 namespace BookStore.Mobile
 {
@@ -20,6 +22,8 @@ namespace BookStore.Mobile
 			builder.Services.AddBlazorWebViewDeveloperTools();
 			builder.Logging.AddDebug();
 #endif
+
+			builder.Services.AddTransient<IBookService, ApiBookService>();
 
 			return builder.Build();
 		}
