@@ -1,8 +1,22 @@
-﻿/*html, body {
+﻿:root{
+    --navbar-height: 55px;
+    --tabbar-height: 55px;
+}
+
+body{
+    padding-top: var(--navbar-height);
+    padding-bottom: var(--tabbar-height);
+}
+
+a{
+    text-decoration: none;
+}
+
+/*html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }*/
 
-a, .btn-link {
+/*a, .btn-link {
     color: #006bb7;
 }
 
@@ -83,4 +97,4 @@ h1:focus {
     .flex-column, .navbar-brand {
         padding-left: env(safe-area-inset-left);
     }
-}
+}*/

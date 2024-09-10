@@ -40,9 +40,11 @@ namespace BookStore.Mobile
 #if ANDROID
 					return new Xamarin.Android.Net.AndroidMessageHandler
 					{
-						ServerCertificateCustomValidationCallback = (httpRequestMessage, certificate, chain, sslPolicyErrors) =>
+						ServerCertificateCustomValidationCallback = 
+						(httpRequestMessage, certificate, chain, sslPolicyErrors) =>
 
-						certificate?.Issuer == "CN-localhost" || sslPolicyErrors == System.Net.Security.SslPolicyErrors.None
+						certificate?.Issuer == "CN=localhost" 
+						|| sslPolicyErrors == System.Net.Security.SslPolicyErrors.None
 					};
 #elif IOS
 					return new NSUrlSessionHandler
@@ -59,8 +61,18 @@ namespace BookStore.Mobile
 			services.AddRefitClient<IBookApi>(refitSettings)
 				.ConfigureHttpClient(httpClient =>
 				{
-					var baseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7038" : "https://localhost:7038";
-
+					string baseUrl = null;
+					
+					if(DeviceInfo.DeviceType == DeviceType.Physical)
+					{
+						baseUrl = "https://8dd3m73x-7038.euw.devtunnels.ms/";
+						//devtunnel url on physical device
+                    }
+					else
+					{
+						//emulator
+						baseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7038" : "https://localhost:7038";
+					}
 					httpClient.BaseAddress = new Uri(baseUrl);
                 });
 		}

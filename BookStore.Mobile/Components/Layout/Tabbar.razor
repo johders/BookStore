@@ -1,0 +1,42 @@
+﻿@inject NavigationManager navManager
+
+<div class="tabbar d-flex justify-content-around align-items-center bg-white py-2 fixed-bottom">
+
+	<a href="/" class="tab-link @ExploreClass">
+		Explore	
+	</a>
+	<a role="button" @onclick="ShowTopGenres" class="tab-link">
+		Top Genres
+	</a>
+	<a href="/genres" class="tab-link @AllGenresClass">
+		Genres
+	</a>
+</div>
+
+@code{
+
+	protected override void OnInitialized()
+	{
+		navManager.LocationChanged += (_, __) => StateHasChanged();
+	}
+
+	private string ExploreClass
+	{
+		get
+		{
+			var path = navManager.Uri.Replace(navManager.BaseUri, "");
+			if(string.IsNullOrWhiteSpace(path) || path == "/" || path.StartsWith("?") || path.StartsWith("/?"))
+			{
+				return "active";
+			}
+			return "";
+		}
+	}
+
+	private string AllGenresClass => navManager.Uri.Contains("/genres") ? "active" : "";
+
+	private void ShowTopGenres()
+	{
+		
+	}
+}
