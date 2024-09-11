@@ -1,17 +1,20 @@
-﻿@page "/books/{bookId:int}"
-
-@inject NavigationManager NavigationManager
+﻿@inject NavigationManager NavigationManager
 
 @inject IBookService BookService
-
-<PageTitle>@_book?.Title | Buddy's Books</PageTitle>
+@inject ICommonService commonService
 
 <SectionContent SectionName="PageTitle">
-	<h1 class="m-0 text-white fw-bold">@_book?.Title - Book Description</h1>
-	<h3 class="text-white mt-2">Hundreds of books for your pleasure</h3>
+	@if (commonService.IsWeb)
+	{
+		<h1 class="m-0 text-white fw-bold">@_book?.Title - Book Description</h1>
+	}
+	else
+	{
+		<span>@_book?.Title</span>
+	}
 </SectionContent>
 
-@if(_book is not null)
+@if (_book is not null)
 {
 	<div class="container mt-5">
 		<div class="row">
@@ -61,7 +64,7 @@
 				<h4 class="my-3">Genres</h4>
 
 				<div class="d-flex flex-wrap">
-					@foreach(var g in _book.Genres)
+					@foreach (var g in _book.Genres)
 					{
 						<a href="/?genre=@g.Slug" class="genre-tag" title="@g.Name Books">@g.Name</a>
 					}
@@ -71,14 +74,15 @@
 				<h4>Similar books</h4>
 
 				<div class="row">
-					@foreach(var b in _similarBooks)
+					@foreach (var b in _similarBooks)
 					{
 						<div class="col-6 col-sm-4 mb-4">
 							<a href="/books/@b.Id" title="@b.Title">
 								<div class=" p-2 d-flex flex-column justify-content-center align-items-center bg-white">
 									<img src="@b.Image" alt="b.Title" class="img-fluid similar-book-img" />
 									<label class="text-truncate mt-2 similar-book-title">@b.Title</label>
-								</div></a>
+								</div>
+							</a>
 						</div>
 					}
 
@@ -89,7 +93,7 @@
 		</div>
 
 
-		
+
 
 	</div>
 }
@@ -98,7 +102,7 @@
 
 @code {
 
-	[Parameter]
+	[Parameter, EditorRequired]
 	public int BookId { get; set; }
 
 	private BookDetailsDto? _book;
@@ -106,7 +110,7 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		if(BookId <= 0)
+		if (BookId <= 0)
 		{
 			NavigationManager.NavigateTo("/", replace: true);
 			return;
@@ -116,7 +120,7 @@
 		_book = await BookService.GetBookAsync(BookId);
 		_similarBooks = await similarBooksTask;
 
-		if(_book is null)
+		if (_book is null)
 		{
 			NavigationManager.NavigateTo("/", replace: true);
 			return;
@@ -124,3 +128,4 @@
 	}
 
 }
+

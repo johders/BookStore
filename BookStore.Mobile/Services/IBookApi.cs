@@ -11,7 +11,7 @@ namespace BookStore.Mobile.Services
         [Get("/api/books")]
         Task<PagedResult<BookListDto>> GetBooksAsync(int pageNo, int pageSize, string? genreSlug = null);
 
-        [Get("/api/{authorSlug}/books")]
+        [Get("/api/authors/{authorSlug}/books")]
         Task<PagedResult<BookListDto>> GetBooksByAuthorAsync(int pageNo, int pageSize, string authorSlug);
 
         [Get("/api/genres")]

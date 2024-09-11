@@ -24,7 +24,9 @@ namespace BookStore.Mobile
 			builder.Logging.AddDebug();
 #endif
 
-			builder.Services.AddTransient<IBookService, ApiBookService>();
+			builder.Services.AddTransient<IBookService, ApiBookService>()
+				.AddSingleton<ICommonService, CommonService>();
+
 
 			ConfigureRefit(builder.Services);
 

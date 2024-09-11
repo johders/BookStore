@@ -1,15 +1,19 @@
-﻿@page "/authors/{authorSlug}/books"
-@page "/authors/{authorSlug}/books/page/{pageNo:int?}"
-
-@inject NavigationManager NavigationManager
+﻿@inject NavigationManager NavigationManager
+@inject ICommonService commonService
 
 @inject IBookService BookService
 
 <PageTitle>@_heading | Buddy's Books</PageTitle>
 
 <SectionContent SectionName="PageTitle">
-	<h1 class="m-0 text-white fw-bold">@_heading</h1>
-	<h3 class="text-white mt-2">Hundreds of books for your pleasure</h3>
+	@if (commonService.IsWeb)
+	{
+		<h1 class="m-0 text-white fw-bold">@_heading</h1>
+	}
+	else
+	{
+		<span>@_heading</span>
+	}
 </SectionContent>
 
 <div class="container-lg">
@@ -32,7 +36,7 @@
 
 	private const int PageSize = 16;
 
-	[Parameter]
+	[Parameter, EditorRequired]
 	public string AuthorSlug { get; set; }
 
 	[Parameter]

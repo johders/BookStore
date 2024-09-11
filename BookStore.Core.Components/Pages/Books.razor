@@ -3,12 +3,25 @@
 
 
 @inject IBookService bookService
+@inject ICommonService commonService
 
 <PageTitle>Home</PageTitle>
 
 <SectionContent SectionName="PageTitle">
-	<h1 class="m-0 text-white fw-bold">Buddy's Books</h1>
-	<h3 class="text-white mt-2">Hundreds of books for your pleasure</h3>
+	@if (commonService.IsWeb)
+	{
+		<h1 class="m-0 text-white fw-bold">Buddy's Books</h1>
+		<h3 class="text-white mt-2">Hundreds of books for your pleasure</h3>
+	}
+	else
+	{
+		<span>Buddy's books'</span>
+	}
+
+</SectionContent>
+
+<SectionContent SectionName="MobilePageTitle">
+
 </SectionContent>
 
 <div class="container-lg">
@@ -16,19 +29,25 @@
 	<div class="row">
 		<div class="col-md-9">
 			<div class="row">
-				<div class="col-sm-12">
-					<div class="genre-list">
-						<div class="genre-item @(string.IsNullOrWhiteSpace(GenreSlug) ? "active" : "")">
-							<a class="genre-link" href="/" title="Top Books">Top Books</a>
-						</div>
-						@foreach(var genre in _genres)
-						{
-							<div class="genre-item @(GenreSlug == genre.Slug ? "active" : "")">
-								<a class="genre-link" href="?genre=@genre.Slug" title="@genre.Name Books">@genre.Name</a>
+
+				@if (commonService.IsWeb)
+				{
+					<div class="col-sm-12">
+						<div class="genre-list">
+							<div class="genre-item @(string.IsNullOrWhiteSpace(GenreSlug) ? "active" : "")">
+								<a class="genre-link" href="/" title="Top Books">Top Books</a>
 							</div>
-						}
+							@foreach (var genre in _genres)
+							{
+								<div class="genre-item @(GenreSlug == genre.Slug ? "active" : "")">
+									<a class="genre-link" href="?genre=@genre.Slug" title="@genre.Name Books">@genre.Name</a>
+								</div>
+							}
+						</div>
 					</div>
-				</div>
+				}
+
+				
 
 				<h3 class="mt-2 mb-3 heading">@_heading</h3>
 

@@ -1,0 +1,10 @@
+﻿@page "/books/{bookId:int}"
+@using BookStore.Core.Components.Shared
+
+<BookDetailsComponent BookId="BookId" />
+
+@code {
+
+	[Parameter]
+	public int BookId { get; set; }
+}
