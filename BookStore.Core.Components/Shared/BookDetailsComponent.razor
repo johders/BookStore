@@ -43,7 +43,7 @@
 					</table>
 				</div>
 
-				<a href="@_book.BookLink" target="_blank" class="btn btn-book-link fab">
+				<a href="@_book.BookLink" target="_blank" class="btn btn-book-link fab mb-5">
 					@(string.IsNullOrWhiteSpace(_book.BookLink) ? "Read More" : "Buy Now")
 				</a>
 
@@ -98,6 +98,18 @@
 	</div>
 }
 
+@if (commonService.IsMobile)
+{
+	<style>
+		.fab{
+			position: fixed;
+			bottom: 0;
+			margin-bottom: 10px !important;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	</style>
+}
 
 
 @code {
@@ -108,7 +120,7 @@
 	private BookDetailsDto? _book;
 	private BookListDto[] _similarBooks = [];
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
 		if (BookId <= 0)
 		{

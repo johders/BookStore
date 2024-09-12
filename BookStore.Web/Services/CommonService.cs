@@ -6,6 +6,6 @@ namespace BookStore.Web.Services
 	{
 		public bool IsWeb => true;
 
-		public bool ISMobile => false;
+		public bool IsMobile => false;
 	}
 }

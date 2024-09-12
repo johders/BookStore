@@ -118,7 +118,7 @@
 
 	private string _heading = "Top Books";
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
 		var genreTask = bookService.GetGenresAsync(topOnly: false);
 		var booksTask = bookService.GetBooksAsync(PageNo ?? 1, PageSize, GenreSlug);

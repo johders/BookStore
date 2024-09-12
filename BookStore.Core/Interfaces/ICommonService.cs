@@ -3,6 +3,6 @@
     public interface ICommonService
     {
         bool IsWeb { get; }
-        bool ISMobile { get; }
+        bool IsMobile { get; }
     }
 }
