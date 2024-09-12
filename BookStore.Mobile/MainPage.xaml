@@ -36,7 +36,8 @@
                 <Label Text="{Binding LoaderMessage}"
                        HorizontalOptions="Center"
                        TextColor="#075e89"
-                       FontSize="18"/>
+                       FontSize="18"
+                       LineBreakMode="TailTruncation"/>
             </VerticalStackLayout>
         </Border>
 
