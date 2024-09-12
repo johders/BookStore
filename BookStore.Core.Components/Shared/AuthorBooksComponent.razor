@@ -69,7 +69,7 @@
 
 	protected override async Task OnParametersSetAsync()
 	{
-		if (PageNo <= 0 || string.IsNullOrWhiteSpace(AuthorSlug) || PageNo < 2)
+		if (PageNo <= 0 || string.IsNullOrWhiteSpace(AuthorSlug) || PageNo < 2 )
 		{
 			NavigationManager.NavigateTo("/");
 			return;
