@@ -46,11 +46,11 @@
 		string[] buttons = ["Top Books", .. _topGenres.Select(g => g.Name).ToArray()];
 		var selectedGenre = await App.Current!.MainPage!.DisplayActionSheet("Select Genre", "Cancel", null, buttons);
 
-		if(!string.IsNullOrWhiteSpace(selectedGenre) && selectedGenre == "Cancel")
+		if(!string.IsNullOrWhiteSpace(selectedGenre) && selectedGenre != "Cancel")
 		{
 			if(selectedGenre == "Top Books")
 			{
-				navManager.NavigateTo("/");
+				navManager.NavigateTo("/?genre=");
 				return;
 			}
 			var genreSlug = _topGenres.First(g => g.Name == selectedGenre).Slug;

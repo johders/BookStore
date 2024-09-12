@@ -48,7 +48,7 @@
 
 	private string _heading = "Author Books";
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
 		if (PageNo <= 0 || string.IsNullOrWhiteSpace(AuthorSlug))
 		{
@@ -56,14 +56,39 @@
 			return;
 		}
 
+		commonService.ShowLoader("Loading author books...");
 
 		(_authorBooks, _totalCount) = await BookService.GetBooksByAuthorAsync(PageNo ?? 1, PageSize, AuthorSlug);
 		_popularBooks = await BookService.GetPopularBooksAsync(10);
 
 		var author = _authorBooks.FirstOrDefault()?.Author;
-		if(author is not null)
+		if (author is not null)
 		{
 			_heading = $"Books by {author.Value.Name}";
 		}
+
+		commonService.HideLoader();
 	}
+
+	// protected override async Task OnInitializedAsync()
+	// {
+	// 	// if (PageNo <= 0 || string.IsNullOrWhiteSpace(AuthorSlug))
+	// 	// {
+	// 	// 	NavigationManager.NavigateTo("/");
+	// 	// 	return;
+	// 	// }
+
+	// 	// commonService.ShowLoader("Loading author books...");
+
+	// 	// (_authorBooks, _totalCount) = await BookService.GetBooksByAuthorAsync(PageNo ?? 1, PageSize, AuthorSlug);
+	// 	// _popularBooks = await BookService.GetPopularBooksAsync(10);
+
+	// 	// var author = _authorBooks.FirstOrDefault()?.Author;
+	// 	// if(author is not null)
+	// 	// {
+	// 	// 	_heading = $"Books by {author.Value.Name}";
+	// 	// }
+
+	// 	// commonService.HideLoader();
+	// }
 }

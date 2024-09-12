@@ -35,7 +35,9 @@
 	private GenreDto[] _genres = [];
 	protected override async Task OnInitializedAsync()
 	{
+		commonService.ShowLoader("Loading...");
 		_genres = await bookService.GetGenresAsync(topOnly: false);
+		commonService.HideLoader();
 	}
 
 }

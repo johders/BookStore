@@ -1,5 +1,6 @@
 ﻿using BookStore.Core.Interfaces;
 using BookStore.Mobile.Services;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Refit;
 
@@ -15,7 +16,8 @@ namespace BookStore.Mobile
 				.ConfigureFonts(fonts =>
 				{
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				});
+				})
+				.UseMauiCommunityToolkit();
 
 			builder.Services.AddMauiBlazorWebView();
 
@@ -26,6 +28,8 @@ namespace BookStore.Mobile
 
 			builder.Services.AddTransient<IBookService, ApiBookService>()
 				.AddSingleton<ICommonService, CommonService>();
+
+			builder.Services.AddSingleton<AppState>();
 
 
 			ConfigureRefit(builder.Services);
